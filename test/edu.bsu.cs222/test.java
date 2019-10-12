@@ -1,12 +1,14 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
+
 public class test {
     @Test
-    public void  connectToGoogle() {
+    public void connectToGoogle() {
         URLConnection urlConnection = null;
         boolean connected=false;
         try {
@@ -18,7 +20,6 @@ public class test {
         if (urlConnection != null){
             connected=true;
         }
-            Assert.assertEquals(connected,true);
+        Assert.assertEquals(connected,true);
     }
-
 }

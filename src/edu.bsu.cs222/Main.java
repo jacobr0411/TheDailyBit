@@ -1,11 +1,8 @@
-import java.net.URL;
-import java.net.URLConnection;
-
 public class Main {
 
-    public static void main(String[] args) {
-
-
+    public static void main(String[] args) throws Exception {
+        GoogleConnection googleConnection = new GoogleConnection();
+        googleConnection.setUrlConnection();
+        googleConnection.pullInputStream();
     }
-
 }
