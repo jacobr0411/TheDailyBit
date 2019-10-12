@@ -11,47 +11,55 @@ import java.util.List;
 import java.util.Map;
 
 public class Parser {
-    public List<Revision> parseCode(InputStream input) {
+    private List<Articles> articleList = new ArrayList<Articles>();
+
+    public void connectToGoogle(InputStream stream) {
+
         JsonParser parser = new JsonParser();
+        InputStream input = stream;
         Reader reader = new InputStreamReader(input);
         JsonElement rootElement = parser.parse(reader);
-        JsonObject rootObject = rootElement.getAsJsonObject();
-        JsonObject pages = rootObject.getAsJsonObject("query").getAsJsonObject("pages");
-        JsonArray revisions = new JsonArray();
-        List<Revision> revisionList = new ArrayList<>();
-        for (Map.Entry<String, JsonElement> entry : pages.entrySet()) {
-            JsonObject entryObject = entry.getValue().getAsJsonObject();
-            revisions = entryObject.getAsJsonArray("revisions");
-        }
-        for (JsonElement value : revisions) {
-            Revision revision = getValues(value);
-            revisionList.add(revision);
-            System.out.println(revision.getUserName());
+        JsonArray articles = rootElement.getAsJsonObject().getAsJsonArray("articles");
 
+        for (JsonElement value : articles) {
+            Articles revision = getValues(value);
+            articleList.add(revision);
         }
-        return revisionList;
+        for (Articles article : articleList){
+            System.out.println(article.toString());
+        }
     }
 
-    private Revision getValues(JsonElement value) {
-        String userName = "";
-        String timeStamp = "";
-        Revision revision = null;
+    private Articles getValues(JsonElement value) {
+        String author = "", title = "", description = "", url = "", urlToImage = "", publishedDate = "";
+        Articles article = null;
 
         for (Map.Entry<String, JsonElement> revisionMap : value.getAsJsonObject().entrySet()) {
             String currentValue = revisionMap.getValue().getAsString();
-            if (revisionMap.getKey().equals("user")) {              //Switch statement would not work
-                userName = currentValue;                            //because these aren't constant
-            } else if (revisionMap.getKey().equals("anon")) {       //variables.
-                String anon = revisionMap.getValue().getAsString();
-                if (revisionMap.getKey().equals("timestamp")) {
-                    timeStamp = currentValue;
-                }
-                revision = new Revision(userName, anon, timeStamp);
-            } else if (revisionMap.getKey().equals("timestamp")) {
-                timeStamp = currentValue;
-                revision = new Revision(userName, timeStamp);
+            if (revisionMap.getKey().equals("author")) {              //Switch statement would not work
+                author = currentValue;                            //because these aren't constant
+            }
+            if (revisionMap.getKey().equals("title")) {       //variables.
+                title = revisionMap.getValue().getAsString();
+            }
+            if (revisionMap.getKey().equals("description")) {
+                description = currentValue;
+            }
+            if (revisionMap.getKey().equals("url")) {
+                url = currentValue;
+            }
+            if (revisionMap.getKey().equals("urltoImage")) {
+                urlToImage = currentValue;
+            }
+            if (revisionMap.getKey().equals("publishedDate")) {
+                publishedDate = currentValue;
             }
         }
-        return revision;
+        article = new Articles(author,title, description, url, urlToImage, publishedDate);
+        return article;
+    }
+
+    public List<Articles> getArticleList() {
+        return articleList;
     }
 }
