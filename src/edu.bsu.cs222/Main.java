@@ -8,6 +8,7 @@ public class Main {
         try {
             InputStream stream = apiConnection.pullInputStream();
             parser.connectToGoogle(stream);
+            parser.getArticleList();
         } catch (Exception e) {
             e.printStackTrace();
         }

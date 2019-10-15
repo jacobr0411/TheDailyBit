@@ -1,6 +1,5 @@
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.InputStream;
@@ -16,8 +15,7 @@ public class Parser {
     public void connectToGoogle(InputStream stream) {
 
         JsonParser parser = new JsonParser();
-        InputStream input = stream;
-        Reader reader = new InputStreamReader(input);
+        Reader reader = new InputStreamReader(stream);
         JsonElement rootElement = parser.parse(reader);
         JsonArray articles = rootElement.getAsJsonObject().getAsJsonArray("articles");
 
@@ -25,14 +23,11 @@ public class Parser {
             Articles revision = getValues(value);
             articleList.add(revision);
         }
-        for (Articles article : articleList){
-            System.out.println(article.toString());
-        }
     }
 
     private Articles getValues(JsonElement value) {
         String author = "", title = "", description = "", url = "", urlToImage = "", publishedDate = "";
-        Articles article = null;
+        Articles article;
 
         for (Map.Entry<String, JsonElement> revisionMap : value.getAsJsonObject().entrySet()) {
             String currentValue = revisionMap.getValue().getAsString();
@@ -55,11 +50,13 @@ public class Parser {
                 publishedDate = currentValue;
             }
         }
-        article = new Articles(author,title, description, url, urlToImage, publishedDate);
+        article = new Articles(author, title, description, url, urlToImage, publishedDate);
         return article;
     }
 
-    public List<Articles> getArticleList() {
-        return articleList;
+    public void getArticleList() {
+        for (Articles article : articleList) {
+            System.out.println(article.toString());
+        }
     }
 }
