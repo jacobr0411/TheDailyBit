@@ -11,7 +11,7 @@ public class APIConnection {
     private URLConnection connection;
 
     public APIConnection() {
-        connection = connectToWikipedia();
+        connection = connectToAPI();
         reader = getBuffer(connection);
     }
 
@@ -35,11 +35,11 @@ public class APIConnection {
         return null;
     }
 
-    private static URLConnection connectToWikipedia() {
+    private static URLConnection connectToAPI() {
         URLConnection urlConnection = null;
 
         try {
-            URL url = new URL(" https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=36033f4c106f44bd955f13e926095fad");
+            URL url = new URL(" https://newsapi.org/v2/top-headlines?country=us&apiKey=36033f4c106f44bd955f13e926095fad");
             urlConnection = url.openConnection();
         } catch (Exception e) {
             e.printStackTrace();

@@ -10,10 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Parser {
-    private List<Articles> articleList = new ArrayList<Articles>();
+    List<Articles> articleList = new ArrayList<Articles>();
 
     public void connectToGoogle(InputStream stream) {
-
         JsonParser parser = new JsonParser();
         Reader reader = new InputStreamReader(stream);
         JsonElement rootElement = parser.parse(reader);
@@ -30,12 +29,12 @@ public class Parser {
         Articles article;
 
         for (Map.Entry<String, JsonElement> revisionMap : value.getAsJsonObject().entrySet()) {
-            String currentValue = revisionMap.getValue().getAsString();
+            String currentValue = revisionMap.getValue().toString();
             if (revisionMap.getKey().equals("author")) {              //Switch statement would not work
                 author = currentValue;                            //because these aren't constant
             }
             if (revisionMap.getKey().equals("title")) {       //variables.
-                title = revisionMap.getValue().getAsString();
+                title = currentValue;
             }
             if (revisionMap.getKey().equals("description")) {
                 description = currentValue;
@@ -54,9 +53,9 @@ public class Parser {
         return article;
     }
 
-    public void getArticleList() {
+    public void getTitleList() {
         for (Articles article : articleList) {
-            System.out.println(article.toString());
+            System.out.println(article.getTitle() + "\n" );
         }
     }
 }
