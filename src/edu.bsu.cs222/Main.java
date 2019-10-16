@@ -22,7 +22,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String response =scanner.nextLine();
         try{
-            InputStream stream = apiConnection.pullBySource(response);
+            SourceSort sourceSort = new SourceSort(response);
+            InputStream stream = sourceSort.pullBySource(response);
             parser.connectToGoogle(stream);
             parser.getTitleList();
         } catch (IOException e) {

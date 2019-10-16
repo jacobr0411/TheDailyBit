@@ -7,7 +7,6 @@ import java.net.URLConnection;
 
 public class APIConnection {
 
-    private String bigSource;
     private static BufferedReader reader = null;
     private URLConnection connection;
 
@@ -17,14 +16,14 @@ public class APIConnection {
         reader = getBuffer(connection);
     }
 
-
-    public InputStream pullBySource(String source) throws IOException {
-
-        InputStream inputStream = null;
-        if (canConnect())
-            inputStream = connection.getInputStream();
-        return inputStream;
-    }
+//
+//    public InputStream pullBySource(String source) throws IOException {
+//
+//        InputStream inputStream = null;
+//        if (canConnect())
+//            inputStream = connection.getInputStream();
+//        return inputStream;
+//    }
 
 
     public InputStream pullInputStream() throws Exception {
@@ -59,12 +58,12 @@ public class APIConnection {
         return urlConnection;
     }
 
-    private static URLConnection connectWithSource(String source) throws IOException {
-        URLConnection urlConnection = null;
-        URL url = new URL("https://newsapi.org/v2/top-headlines?sources="+source+"-news&apiKey=36033f4c106f44bd955f13e926095fad");
-        urlConnection = url.openConnection();
-        return urlConnection;
-    }
+//    private static URLConnection connectWithSource(String source) throws IOException {
+//        URLConnection urlConnection = null;
+//        URL url = new URL("https://newsapi.org/v2/top-headlines?sources="+source+"-news&apiKey=36033f4c106f44bd955f13e926095fad");
+//        urlConnection = url.openConnection();
+//        return urlConnection;
+//    }
 
     boolean canConnect() {
         if (connection != null) {
