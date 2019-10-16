@@ -1,7 +1,9 @@
+import org.apiguardian.api.API;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.net.URLConnection;
 
 import static org.junit.Assert.*;
 
