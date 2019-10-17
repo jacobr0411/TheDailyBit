@@ -23,12 +23,13 @@ public class Main {
         String response =scanner.nextLine();
         try{
             SourceSort sourceSort = new SourceSort(response);
-            InputStream stream = sourceSort.pullBySource(response);
+            InputStream stream = sourceSort.pullBySource();
             parser.connectToGoogle(stream);
             parser.getTitleList();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        scanner.close();
     }
 
 }

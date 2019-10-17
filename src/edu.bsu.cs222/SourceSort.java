@@ -8,20 +8,20 @@ import java.net.URLConnection;
 public class SourceSort {
 
     private static URLConnection connection;
+    private static BufferedReader reader = null;
 
     public SourceSort(String source) throws IOException {
-        BufferedReader reader = null;
         connection = connectWithSource(source);
         reader = getBuffer(connectWithSource(source));
     }
 
     private static URLConnection connectWithSource(String source) throws IOException {
         URLConnection urlConnection = null;
-        URL url = new URL("https://newsapi.org/v2/top-headlines?sources="+source+"-news&apiKey=36033f4c106f44bd955f13e926095fad");
+        URL url = new URL("https://newsapi.org/v2/top-headlines?sources="+source+"&apiKey=36033f4c106f44bd955f13e926095fad");
         urlConnection = url.openConnection();
         return urlConnection;
     }
-    public InputStream pullBySource(String source) throws IOException {
+    public InputStream pullBySource() throws IOException {
         APIConnection apiConnection = new APIConnection();
         InputStream inputStream = null;
         if (apiConnection.canConnect())
