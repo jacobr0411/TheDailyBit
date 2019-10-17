@@ -1,8 +1,8 @@
-public class Articles {
+public class Article {
     private String author, title, description, url, urlToImage, publishedDate;
 
-    public Articles(String author, String title, String description,
-                        String url, String urlToImage, String publishedDate){
+    Article(String author, String title, String description,
+            String url, String urlToImage, String publishedDate){
         this.author = author;
         this.title = title;
         this.description = description;
@@ -11,27 +11,27 @@ public class Articles {
         this.publishedDate = publishedDate;
     }
 
-    public String getAuthor() {
+    String getAuthor() {
         return author;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
-    public String getUrl() {
+    String getUrl() {
         return url;
     }
 
-    public String getUrlToImage() {
+    String getUrlToImage() {
         return urlToImage;
     }
 
-    public String getPublishedDate() {
+    String getPublishedDate() {
         return publishedDate;
     }
 

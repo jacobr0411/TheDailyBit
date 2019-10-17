@@ -7,8 +7,8 @@ public class APIConnectionTest {
 
     @Test
     public void pullInputStream() throws Exception {
-        APIConnection apiConnection = new APIConnection();
-        apiConnection.pullInputStream();
-        Assert.assertNotNull(apiConnection);
+        SourceSort sourceSort = new SourceSort();
+        sourceSort.pullInputStream();
+        Assert.assertNotNull(sourceSort);
     }
 }

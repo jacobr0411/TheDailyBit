@@ -1,11 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class ArticlesTest {
 
-    public Articles articles = new Articles("author", "title","description",
+    private Article articles = new Article("author", "title","description",
             "url", "urlToImage", "publishedDate");
 
     @Test

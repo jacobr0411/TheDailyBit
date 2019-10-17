@@ -1,24 +1,21 @@
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class ParserTest {
 
     @Test
-    public void connectToGoogle() {
+    public void getArticles() {
         InputStream input = getClass().getClassLoader().getResourceAsStream("sample.json");
         Parser parser = new Parser();
-        parser.connectToGoogle(input);
+        parser.getArticles(input);
     }
 
     @Test
     public void getTitleList() {
-        List<Articles> articleList = new ArrayList<>();
+        List<Article> articleList = new ArrayList<>();
         Parser parser = new Parser();
         parser.getTitleList();
     }

@@ -1,39 +1,33 @@
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class SourceSort {
+class SourceSort {
+    private static URLConnection connection = null;
 
-    private static URLConnection connection;
-    private static BufferedReader reader = null;
-
-    public SourceSort(String source) throws IOException {
-        connection = connectWithSource(source);
-        reader = getBuffer(connectWithSource(source));
+    SourceSort() throws IOException{
+        connectToAPI();
     }
 
-    private static URLConnection connectWithSource(String source) throws IOException {
-        URLConnection urlConnection = null;
+    SourceSort(String sourceName) throws IOException{
+        connectToAPI(sourceName);
+    }
+
+    private static void connectToAPI() throws IOException{
+        URL url = new URL(" https://newsapi.org/v2/top-headlines?country=us&apiKey=36033f4c106f44bd955f13e926095fad");
+        connection = url.openConnection();
+    }
+
+    private static void connectToAPI(String source) throws IOException {
         URL url = new URL("https://newsapi.org/v2/top-headlines?sources="+source+"&apiKey=36033f4c106f44bd955f13e926095fad");
-        urlConnection = url.openConnection();
-        return urlConnection;
+        connection = url.openConnection();
     }
-    public InputStream pullBySource() throws IOException {
-        APIConnection apiConnection = new APIConnection();
+
+    InputStream pullInputStream() throws IOException {
         InputStream inputStream = null;
-        if (apiConnection.canConnect())
+        if (connection != null)
             inputStream = connection.getInputStream();
         return inputStream;
-    }
-    private BufferedReader getBuffer(URLConnection connection) {
-        try {
-            return new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

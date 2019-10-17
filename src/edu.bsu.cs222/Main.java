@@ -4,32 +4,38 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
-
-        System.out.println("Welcome to the Daily Bit\n\n Here are the top headlines for the day");
-
+    public static void main(String[] args) throws IOException {
+        InputStream stream = null;
         Parser parser = new Parser();
-        APIConnection apiConnection = new APIConnection();
+        Scanner input = new Scanner(System.in);
+        SourceSort sourceSort = new SourceSort();
 
+        System.out.println("Welcome to the Daily Bit.\n\nHere are the top headlines for the day:");
         try {
-            InputStream stream = apiConnection.pullInputStream();
-            parser.connectToGoogle(stream);
-            parser.getTitleList();
+            stream = sourceSort.pullInputStream();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Would you like to narrow your search by a source? ei:fox, cnn, bbc");
-        Scanner scanner = new Scanner(System.in);
-        String response =scanner.nextLine();
-        try{
-            SourceSort sourceSort = new SourceSort(response);
-            InputStream stream = sourceSort.pullBySource();
-            parser.connectToGoogle(stream);
+        parser.getArticles(stream);
+        parser.getTitleList();
+
+        System.out.println("\nWould you like to narrow your search by a source? ei:fox, cnn, bbc");
+        String response = input.nextLine().toLowerCase();
+        if(response.equals("yes")) {
+            System.out.println("Enter the source: ei:ESPN, CNN, IGN");
+            response = input.nextLine().toLowerCase();
+            System.out.printf("\nThese are the top %s headlines for today:\n", response);
+            parser = new Parser();
+            sourceSort = new SourceSort(response);
+            try {
+                stream = sourceSort.pullInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            parser.getArticles(stream);
             parser.getTitleList();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        scanner.close();
+        input.close();
     }
 
 }
