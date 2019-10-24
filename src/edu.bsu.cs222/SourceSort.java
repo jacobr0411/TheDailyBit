@@ -20,7 +20,7 @@ class SourceSort {
     }
 
     private static void connectToAPI(String source) throws IOException {
-        URL url = new URL("https://newsapi.org/v2/top-headlines?sources="+source+"&apiKey=36033f4c106f44bd955f13e926095fad");
+        URL url = new URL("https://newsapi.org/v2/top-headlines?sources=" + source + "&apiKey=36033f4c106f44bd955f13e926095fad");
         connection = url.openConnection();
     }
 
