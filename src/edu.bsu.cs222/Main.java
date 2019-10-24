@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        String response;
         InputStream stream = null;
         Parser parser = new Parser();
         Scanner input = new Scanner(System.in);
@@ -19,9 +20,10 @@ public class Main {
         parser.getArticles(stream);
         parser.getTitleList();
         parser.getContent();
+        parser.getURLContent(2);
 
-        System.out.println("\nWould you like to narrow your search by a source? ei:fox, cnn, bbc");
-        String response = input.nextLine().toLowerCase();
+        System.out.println("\nWould you like to narrow your search by a source?");
+        response = input.nextLine().toLowerCase();
         if(response.equals("yes")) {
             System.out.println("Enter the source: ei:ESPN, CNN, IGN");
             response = input.nextLine().toLowerCase();

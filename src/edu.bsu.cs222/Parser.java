@@ -12,6 +12,10 @@ import java.util.Map;
 class Parser {
     private List<Article> articleList = new ArrayList<>();
 
+    List<Article> getArticleList() {
+        return articleList;
+    }
+
     void getArticles(InputStream stream) {
         JsonParser parser = new JsonParser();
         Reader reader = new InputStreamReader(stream);
@@ -43,7 +47,7 @@ class Parser {
                 case "urltoImage":
                     urlToImage = currentValue;
                     break;
-                case "publishedDate":
+                case "publishedAt":
                     publishedDate = currentValue;
                     break;
                 case "content":
@@ -54,9 +58,13 @@ class Parser {
     }
 
     void getTitleList() {
-        for (Article article : articleList) {
-            System.out.printf("\n%s\n", article.getTitle());
+        for (int i = 1; i <= articleList.size(); i++) {
+            System.out.printf("%d. \n%s\n\n", i, articleList.get(i - 1).getTitle());
         }
+    }
+
+    void getURLContent(int articleNumber){
+        System.out.println(articleList.get(articleNumber - 1).getUrl());
     }
     void getContent(){
         for (Article article : articleList){
