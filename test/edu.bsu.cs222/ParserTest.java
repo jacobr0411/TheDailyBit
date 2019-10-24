@@ -1,3 +1,5 @@
+package edu.bsu.cs222;
+
 import org.junit.Test;
 
 import java.io.InputStream;
