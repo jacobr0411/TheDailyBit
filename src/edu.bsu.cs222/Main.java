@@ -23,6 +23,7 @@ public class Main {
         }
         parser.getArticles(stream);
         parser.getTitleList();
+        parser.getContent();
         parser.getURLContent(2);
 
         System.out.println("\nWould you like to narrow your search by a source?");
@@ -60,4 +61,5 @@ public class Main {
         }
         input.close();
     }
+
 }
