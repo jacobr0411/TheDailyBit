@@ -18,6 +18,7 @@ public class Main {
         }
         parser.getArticles(stream);
         parser.getTitleList();
+        parser.getContent();
 
         System.out.println("\nWould you like to narrow your search by a source? ei:fox, cnn, bbc");
         String response = input.nextLine().toLowerCase();

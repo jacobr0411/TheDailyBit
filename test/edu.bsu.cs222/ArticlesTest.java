@@ -4,7 +4,7 @@ import org.junit.Test;
 public class ArticlesTest {
 
     private Article articles = new Article("author", "title","description",
-            "url", "urlToImage", "publishedDate");
+            "url", "urlToImage", "publishedDate", "content");
 
     @Test
     public void getAuthor() {

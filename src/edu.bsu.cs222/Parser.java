@@ -25,7 +25,7 @@ class Parser {
     }
 
     private Article getValues(JsonElement value) {
-        String author = "", title = "", description = "", url = "", urlToImage = "", publishedDate = "";
+        String author = "", title = "", description = "", url = "", urlToImage = "", publishedDate = "", content = "";
 
         for (Map.Entry<String, JsonElement> revisionMap : value.getAsJsonObject().entrySet()) {
             String currentValue = revisionMap.getValue().toString();
@@ -46,14 +46,21 @@ class Parser {
                 case "publishedDate":
                     publishedDate = currentValue;
                     break;
+                case "content":
+                    content = currentValue;
             }
         }
-        return new Article(author, title, description, url, urlToImage, publishedDate);
+        return new Article(author, title, description, url, urlToImage, publishedDate, content);
     }
 
     void getTitleList() {
         for (Article article : articleList) {
             System.out.printf("\n%s\n", article.getTitle());
+        }
+    }
+    void getContent(){
+        for (Article article : articleList){
+            System.out.printf("\n%s\n", article.getContent());
         }
     }
 }

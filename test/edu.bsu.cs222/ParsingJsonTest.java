@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class test {
+public class ParsingJsonTest {
 
     @Test
     public void getArticles() {
@@ -28,7 +28,7 @@ public class test {
     }
 
     private Article getValues(JsonElement value) {
-        String author = "", title = "", description = "", url = "", urlToImage = "", publishedDate = "";
+        String author = "", title = "", description = "", url = "", urlToImage = "", publishedDate = "", content = "";
 
         for (Map.Entry<String, JsonElement> revisionMap : value.getAsJsonObject().entrySet()) {
             String currentValue = revisionMap.getValue().getAsString();
@@ -51,6 +51,6 @@ public class test {
                 publishedDate = currentValue;
             }
         }
-        return new Article(author,title, description, url, urlToImage, publishedDate);
+        return new Article(author,title, description, url, urlToImage, publishedDate, content);
     }
 }
