@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         String response;
         InputStream stream = null;
-        Parser parser = new Parser();
+        JSONParser parser = new JSONParser();
         Scanner input = new Scanner(System.in);
         SourceSearch sourceSearch = new SourceSearch();
 
@@ -31,7 +31,7 @@ public class Main {
                 System.out.println("Enter the source: ei:ESPN, CNN, IGN");
                 response = input.nextLine().toLowerCase();
                 System.out.printf("\nThese are the top %s headlines for today:\n", response);
-                parser = new Parser();
+                parser = new JSONParser();
                 sourceSearch.setIdentifier(response);
                 try {
                 sourceSearch.connectToAPIBySource();

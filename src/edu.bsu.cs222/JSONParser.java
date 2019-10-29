@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class Parser {
+class JSONParser {
 
     private List<Article> articleList = new ArrayList<>();
 
