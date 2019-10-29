@@ -9,8 +9,7 @@ public class Main {
         InputStream stream = null;
         Parser parser = new Parser();
         Scanner input = new Scanner(System.in);
-        SourceSort sourceSort = new SourceSort();
-        CountrySort countrySort = new CountrySort();
+        SourceSearch sourceSearch = new SourceSearch();
 
         System.out.println("Welcome to the Daily Bit.\n\nHere are the top headlines for the day:");
         try {
@@ -33,29 +32,11 @@ public class Main {
                 response = input.nextLine().toLowerCase();
                 System.out.printf("\nThese are the top %s headlines for today:\n", response);
                 parser = new Parser();
-            sourceSearch.setIdentifier(response);
+                sourceSearch.setIdentifier(response);
                 try {
                 sourceSearch.connectToAPIBySource();
                 stream = sourceSearch.pullInputStream();
                 } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                parser.getArticles(stream);
-                parser.getTitleList();
-            }
-
-        System.out.println("\nWould you like to sort by Country?");
-        response = input.nextLine().toLowerCase();
-        if(response.equals("yes")) {
-                System.out.println("Enter the country: ei: US, FR, RU");
-                response = input.nextLine().toLowerCase();
-                System.out.printf("\nThese are the top %s headlines for today:\n", response);
-                parser = new Parser();
-            sourceSearch.setIdentifier(response);
-                try {
-                sourceSearch.connectToAPIByCountry();
-                stream = sourceSearch.pullInputStream();
-                }  catch (IOException e) {
                     e.printStackTrace();
                 }
                 parser.getArticles(stream);
