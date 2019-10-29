@@ -1,5 +1,3 @@
-package edu.bsu.cs222;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -12,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 class Parser {
+
     private List<Article> articleList = new ArrayList<>();
 
     List<Article> getArticleList() {
@@ -67,10 +66,5 @@ class Parser {
 
     void getURLContent(int articleNumber){
         System.out.println(articleList.get(articleNumber - 1).getUrl());
-    }
-    void getContent(){
-        for (Article article : articleList){
-            System.out.printf("\n%s\n", article.getContent());
-        }
     }
 }

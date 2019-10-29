@@ -1,5 +1,3 @@
-package edu.bsu.cs222;
-
 import com.google.gson.*;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,5 +1,3 @@
-package edu.bsu.cs222;
-
 public class Article {
     private String author, title, description, url, urlToImage, publishedDate, content;
 
