@@ -6,10 +6,9 @@ import java.io.IOException;
 
 public class WebsiteParser {
 
-    void getArticleContent() throws IOException {
-        Document doc = Jsoup.connect("http://google.com").get();
-        Elements elements = doc.getElementsByTag("p");
-
+    void getArticleContent(String url) throws IOException {
+        Document doc = Jsoup.connect(url).get();
+        System.out.println(doc.getElementsByTag("p").text());
     }
 
 }

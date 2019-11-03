@@ -1,7 +1,10 @@
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -64,7 +67,23 @@ class JSONParser {
         }
     }
 
-    void getURLContent(int articleNumber){
-        System.out.println(articleList.get(articleNumber - 1).getUrl());
+    void getURLContent(int articleNumber) throws IOException{
+        String url = articleList.get(articleNumber - 1).getUrl().replaceAll("\"","");
+        Document doc = Jsoup.connect(url).get();
+        System.out.println(doc.getElementsByTag("body").text());
+    }
+
+    void getArticleContent(String url) throws IOException {
+        Document doc = Jsoup.connect(url).get();
+        String content = doc.getElementsByTag("p").text();
+        if(content.isEmpty()) {
+            content = doc.getElementsByTag("body").text();
+            if (content.isEmpty()) {
+                System.out.println("Error Retrieving Article: Implement new elementTag for this Article");
+            }
+            System.out.println(content);
+        }
+        System.out.println(content);
+
     }
 }

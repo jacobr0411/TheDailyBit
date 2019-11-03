@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         String response;
         InputStream stream = null;
         JSONParser parser = new JSONParser();
@@ -20,7 +20,12 @@ public class Main {
         }
         parser.getArticles(stream);
         parser.getTitleList();
-        parser.getURLContent(2);
+        try {
+            parser.getURLContent(1);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
 
         System.out.println("\nWould you like to narrow your search by a source or country?");
         response = input.nextLine().toLowerCase();
