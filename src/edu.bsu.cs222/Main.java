@@ -21,7 +21,7 @@ public class Main {
         parser.getArticles(stream);
         parser.getTitleList();
         try {
-            parser.getURLContent(1);
+            parser.getURLContent(2);
         } catch (Exception e){
             System.out.println(e);
         }

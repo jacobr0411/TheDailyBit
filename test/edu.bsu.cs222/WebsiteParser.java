@@ -15,7 +15,7 @@ public class WebsiteParser {
         //Elements elements = doc.getElementsByTag("p");
         //System.out.println(elements.text());
         Assert.assertNotNull(doc);
-        System.out.println(doc.getElementsByTag("body").text());
+        System.out.println(doc.getElementsByTag("p").text());
         //System.out.println(doc.getElementsByTag("p").text());
         //System.out.println(doc.outerHtml());
     }

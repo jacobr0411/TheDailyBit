@@ -1,6 +1,11 @@
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import de.l3s.boilerpipe.document.TextDocument;
+import de.l3s.boilerpipe.extractors.CommonExtractors;
+import de.l3s.boilerpipe.sax.BoilerpipeSAXInput;
+import de.l3s.boilerpipe.sax.HTMLDocument;
+import de.l3s.boilerpipe.sax.HTMLFetcher;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -8,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,13 +73,16 @@ class JSONParser {
         }
     }
 
-    void getURLContent(int articleNumber) throws IOException{
+    void getURLContent(int articleNumber) throws Exception{
         String url = articleList.get(articleNumber - 1).getUrl().replaceAll("\"","");
-        Document doc = Jsoup.connect(url).get();
-        System.out.println(doc.getElementsByTag("body").text());
+        System.out.println(url);
+        HTMLDocument htmlDoc = HTMLFetcher.fetch(new URL(url));
+        TextDocument doc = new BoilerpipeSAXInput(htmlDoc.toInputSource()).getTextDocument();
+        String content = CommonExtractors.ARTICLE_EXTRACTOR.getText(doc);
+        System.out.println(content);
     }
-
-    void getArticleContent(String url) throws IOException {
+/*
+    private void getArticleContent(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
         String content = doc.getElementsByTag("p").text();
         if(content.isEmpty()) {
@@ -81,9 +90,29 @@ class JSONParser {
             if (content.isEmpty()) {
                 System.out.println("Error Retrieving Article: Implement new elementTag for this Article");
             }
-            System.out.println(content);
+            //System.out.println(content);
+            formatParagragh(content);
         }
-        System.out.println(content);
-
+        //System.out.println(content);
+        formatParagragh(content);
     }
+
+    private void formatParagragh(String content){
+        String[] strings = new String[10];
+
+        for(int i = 0; i < content.length() - 1; i++){
+            int wordCount = 60 * (i +1);
+            int lineIterator = wordCount/60;
+            if (content.length() > wordCount) {
+                strings[i] = content.substring(lineIterator,wordCount);
+            } else {
+                strings[i] = content.substring(lineIterator);
+                break;
+            }
+        }
+        for(String string : strings){
+            System.out.println(string);
+        }
+    }
+ */
 }
