@@ -10,13 +10,13 @@ public class ParserTest {
     public void getArticles() {
         InputStream input = getClass().getClassLoader().getResourceAsStream("sample.json");
         JSONParser parser = new JSONParser();
-        parser.getArticles(input);
+        parser.printArticles(input);
     }
 
     @Test
     public void getTitleList() {
         List<Article> articleList = new ArrayList<>();
         JSONParser parser = new JSONParser();
-        parser.getTitleList();
+        parser.printTitleList();
     }
 }

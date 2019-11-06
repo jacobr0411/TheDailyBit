@@ -18,8 +18,8 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        parser.getArticles(stream);
-        parser.getTitleList();
+        parser.printArticles(stream);
+        parser.printTitleList();
         try {
             parser.getURLContent(2);
         } catch (Exception e){
@@ -44,8 +44,8 @@ public class Main {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                parser.getArticles(stream);
-                parser.getTitleList();
+                parser.printArticles(stream);
+                parser.printTitleList();
             }
         }
         input.close();

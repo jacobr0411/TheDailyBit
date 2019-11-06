@@ -22,11 +22,7 @@ class JSONParser {
 
     private List<Article> articleList = new ArrayList<>();
 
-    List<Article> getArticleList() {
-        return articleList;
-    }
-
-    void getArticles(InputStream stream) {
+    void printArticles(InputStream stream) {
         JsonParser parser = new JsonParser();
         Reader reader = new InputStreamReader(stream);
         JsonElement rootElement = parser.parse(reader);
@@ -67,7 +63,7 @@ class JSONParser {
         return new Article(author, title, description, url, urlToImage, publishedDate, content);
     }
 
-    void getTitleList() {
+    void printTitleList() {
         for (int i = 1; i <= articleList.size(); i++) {
             System.out.printf("%d. \n%s\n\n", i, articleList.get(i - 1).getTitle());
         }
