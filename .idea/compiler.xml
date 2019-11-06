@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="The-Daily-Bit" />
+        <module name="The-Daily-Bit-1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
-      <module name="The-Daily-Bit" target="11" />
+      <module name="The-Daily-Bit-1" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

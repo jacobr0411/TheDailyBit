@@ -77,6 +77,7 @@ class JSONParser {
         String content = CommonExtractors.ARTICLE_EXTRACTOR.getText(doc);
         System.out.println(content);
     }
+
 /*
     private void getArticleContent(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
