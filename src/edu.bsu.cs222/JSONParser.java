@@ -20,7 +20,11 @@ class JSONParser {
     private List<Article> articleList = new ArrayList<>();
     private ArrayList<String> titleList = new ArrayList<>();
 
-    void printArticles(InputStream stream) {
+    List<Article> getArticleList() {
+        return articleList;
+    }
+
+    void getArticles(InputStream stream) {
         JsonParser parser = new JsonParser();
         Reader reader;
         reader = new InputStreamReader(stream);
@@ -76,13 +80,14 @@ class JSONParser {
         return titleList;
     }
 
-    void getURLContent(int articleNumber) throws Exception{
+    public String getURLContent(int articleNumber) throws Exception{
         String url = articleList.get(articleNumber - 1).getUrl().replaceAll("\"","");
         System.out.println(url);
         HTMLDocument htmlDoc = HTMLFetcher.fetch(new URL(url));
         TextDocument doc = new BoilerpipeSAXInput(htmlDoc.toInputSource()).getTextDocument();
         String content = CommonExtractors.ARTICLE_EXTRACTOR.getText(doc);
         System.out.println(content);
+        return content;
     }
 
 /*
