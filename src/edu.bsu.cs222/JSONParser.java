@@ -6,10 +6,7 @@ import de.l3s.boilerpipe.extractors.CommonExtractors;
 import de.l3s.boilerpipe.sax.BoilerpipeSAXInput;
 import de.l3s.boilerpipe.sax.HTMLDocument;
 import de.l3s.boilerpipe.sax.HTMLFetcher;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -21,6 +18,7 @@ import java.util.Map;
 class JSONParser {
 
     private List<Article> articleList = new ArrayList<>();
+    private ArrayList<String> titleList = new ArrayList<>();
 
     List<Article> getArticleList() {
         return articleList;
@@ -28,7 +26,8 @@ class JSONParser {
 
     void getArticles(InputStream stream) {
         JsonParser parser = new JsonParser();
-        Reader reader = new InputStreamReader(stream);
+        Reader reader;
+        reader = new InputStreamReader(stream);
         JsonElement rootElement = parser.parse(reader);
         JsonArray articles = rootElement.getAsJsonObject().getAsJsonArray("articles");
 
@@ -71,6 +70,14 @@ class JSONParser {
         for (int i = 1; i <= articleList.size(); i++) {
             System.out.printf("%d. \n%s\n\n", i, articleList.get(i - 1).getTitle());
         }
+    }
+
+    ArrayList<String> TitleList(){
+        for( int i = 1; i <= articleList.size(); i++){
+            String title = articleList.get(i -1).getTitle();
+            titleList.add(title);
+        }
+        return titleList;
     }
 
     void getURLContent(int articleNumber) throws Exception{
