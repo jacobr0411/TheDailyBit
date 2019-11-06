@@ -18,7 +18,6 @@ import java.util.Map;
 class JSONParser {
 
     private List<Article> articleList = new ArrayList<>();
-    private ArrayList<String> titleList = new ArrayList<>();
 
     void printArticles(InputStream stream) {
         JsonParser parser = new JsonParser();
@@ -69,9 +68,9 @@ class JSONParser {
     }
 
     ArrayList<String> TitleList(){
-        for( int i = 1; i <= articleList.size(); i++){
-            String title = articleList.get(i -1).getTitle();
-            titleList.add(title);
+        ArrayList<String> titleList = new ArrayList<>();
+        for( int i = 0; i <= articleList.size() - 1; i++){
+            titleList.add(articleList.get(i).getTitle());
         }
         return titleList;
     }
