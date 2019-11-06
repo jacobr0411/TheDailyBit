@@ -1,31 +1,39 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class DailyBitGUI extends JFrame{
+public class DailyBitGUI extends JFrame {
     private JTextField Input;
     private JList<Object> HeadLines;
     private JButton searchConfirm;
     private JPanel rootPanel;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
+    private JTextArea output;
+    private String newline = "\n";
 
-    DailyBitGUI() throws IOException {
-        SourceSearch sourceSearch = new SourceSearch();
+
+    public DailyBitGUI() throws IOException {
         JSONParser parser = new JSONParser();
-        InputStream stream;
-        Object[] data;
+        InputStream stream = null;
+        SourceSearch sourceSearch = new SourceSearch();
 
         sourceSearch.connectToAPI();
         stream = sourceSearch.pullInputStream();
-        parser.printArticles(stream);
-        parser.printTitleList();
+        parser.getArticles(stream);
 
-        data = parser.TitleList().toArray();
+        parser.getTitleList();//test stream is not null
+
+        Object[] data = parser.TitleList().toArray();
+
 
         add(rootPanel);
 
@@ -34,14 +42,89 @@ public class DailyBitGUI extends JFrame{
         HeadLines.setLayoutOrientation(JList.VERTICAL);
         HeadLines.setVisibleRowCount(-1);
 
+        ListSelectionModel listSelectionModel;
+        listSelectionModel = HeadLines.getSelectionModel();
+        listSelectionModel.addListSelectionListener(
+                new SharedListSelectionHandler());
+
 //        JScrollPane listScroller = new JScrollPane(HeadLines);
 //        listScroller.setPreferredSize(new Dimension(250, 80));
 
-        setTitle("The Daily Bit");
-        setSize(700,700);
+
+        setTitle("Daily Bit");
+        setSize(700, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        searchConfirm.addActionListener(e -> JOptionPane.showMessageDialog(rootPanel,"something"));
+
+        searchConfirm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JOptionPane.showMessageDialog(rootPanel, "something");
+
+
+            }
+        });
+
+//        HeadLines.addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//                ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+//
+//                int firstIndex = e.getFirstIndex();
+//                int lastIndex = e.getLastIndex();
+//                boolean isAdjusting = e.getValueIsAdjusting();
+//                output.append("Event for indexes "
+//                        + firstIndex + " - " + lastIndex
+//                        + "; isAdjusting is " + isAdjusting
+//                        + "; selected indexes:");
+//
+//                if (lsm.isSelectionEmpty()) {
+//                    output.append(" <none>");
+//                } else {
+//                    // Find out which indexes are selected.
+//                    int minIndex = lsm.getMinSelectionIndex();
+//                    int maxIndex = lsm.getMaxSelectionIndex();
+//                    for (int i = minIndex; i <= maxIndex; i++) {
+//                        if (lsm.isSelectedIndex(i)) {
+//                            output.append(" " + i);
+//                        }
+//                    }
+//                }
+//                output.append(newline);
+//            }
+//        });
+    }
+
+    private class SharedListSelectionHandler implements ListSelectionListener {
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+
+            int firstIndex = e.getFirstIndex();
+            int lastIndex = e.getLastIndex();
+            boolean isAdjusting = e.getValueIsAdjusting();
+            output.append("Event for indexes "
+                    + firstIndex + " - " + lastIndex
+                    + "; isAdjusting is " + isAdjusting
+                    + "; selected indexes:");
+
+            if (lsm.isSelectionEmpty()) {
+                output.append(" <none>");
+            }
+            else {
+                // Find out which indexes are selected.
+                int minIndex = lsm.getMinSelectionIndex();
+                int maxIndex = lsm.getMaxSelectionIndex();
+                for (int i = minIndex; i <= maxIndex; i++) {
+                    if (lsm.isSelectedIndex(i)) {
+                        output.append(" " + i);
+                    }
+                }
+            }
+            output.append(newline);
+        }
     }
 }
 
