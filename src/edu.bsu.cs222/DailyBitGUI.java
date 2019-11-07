@@ -21,19 +21,18 @@ public class DailyBitGUI extends JFrame {
     //private JSONParser parser = new JSONParser();
 
 
-    public DailyBitGUI() throws IOException {
-        JSONParser parser = new JSONParser();
-        InputStream stream = null;
+    DailyBitGUI() throws IOException {
         SourceSearch sourceSearch = new SourceSearch();
+        JSONParser parser = new JSONParser();
+        InputStream stream;
+
 
         sourceSearch.connectToAPI();
         stream = sourceSearch.pullInputStream();
         parser.getArticles(stream);
-
         parser.getTitleList();//test stream is not null
 
         Object[] data = parser.TitleList().toArray();
-
 
         add(rootPanel);
 
@@ -44,14 +43,13 @@ public class DailyBitGUI extends JFrame {
 
         ListSelectionModel listSelectionModel;
         listSelectionModel = HeadLines.getSelectionModel();
-        listSelectionModel.addListSelectionListener(
-                new SharedListSelectionHandler());
+        listSelectionModel.addListSelectionListener(new SharedListSelectionHandler());
 
 //        JScrollPane listScroller = new JScrollPane(HeadLines);
 //        listScroller.setPreferredSize(new Dimension(250, 80));
 
 
-        setTitle("Daily Bit");
+        setTitle("The Daily Bit");
         setSize(700, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -60,14 +58,9 @@ public class DailyBitGUI extends JFrame {
         searchConfirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 JOptionPane.showMessageDialog(rootPanel, "something");
-
-
             }
         });
-
-
     }
 
     private class SharedListSelectionHandler implements ListSelectionListener {
