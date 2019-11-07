@@ -18,6 +18,9 @@ public class DailyBitGUI extends JFrame {
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private String newline = "\n";
+    SourceSearch sourceSearch = new SourceSearch();
+    JSONParser parser = new JSONParser();
+    InputStream stream;
     //private JSONParser parser = new JSONParser();
 
 
@@ -45,6 +48,7 @@ public class DailyBitGUI extends JFrame {
         listSelectionModel = HeadLines.getSelectionModel();
         listSelectionModel.addListSelectionListener(new SharedListSelectionHandler());
 
+
 //        JScrollPane listScroller = new JScrollPane(HeadLines);
 //        listScroller.setPreferredSize(new Dimension(250, 80));
 
@@ -67,9 +71,9 @@ public class DailyBitGUI extends JFrame {
 
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            JSONParser parser = new JSONParser();
-            InputStream stream = null;
-            SourceSearch sourceSearch = new SourceSearch();
+//            JSONParser parser = new JSONParser();
+//            InputStream stream = null;
+//            SourceSearch sourceSearch = new SourceSearch();
 
             try {
                 sourceSearch.connectToAPI();
@@ -89,7 +93,7 @@ public class DailyBitGUI extends JFrame {
             boolean isAdjusting = e.getValueIsAdjusting();
             try {
 //                output.append(parser.getURLContent(firstIndex));
-                JOptionPane.showMessageDialog(rootPanel, parser.getURLContent(firstIndex));
+                JOptionPane.showMessageDialog(rootPanel, parser.getURLContent(lastIndex));
 
             } catch (Exception ex) {
                 ex.printStackTrace();

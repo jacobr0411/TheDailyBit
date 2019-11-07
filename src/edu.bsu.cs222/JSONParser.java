@@ -34,6 +34,7 @@ class JSONParser {
         for (JsonElement value : articles) {
             Article article = getValues(value);
             articleList.add(article);
+
         }
     }
 
@@ -81,7 +82,7 @@ class JSONParser {
     }
 
     public String getURLContent(int articleNumber) throws Exception{
-        String url = articleList.get(articleNumber - 1).getUrl().replaceAll("\"","");
+        String url = articleList.get(articleNumber).getUrl().replaceAll("\"","");
         System.out.println(url);
         HTMLDocument htmlDoc = HTMLFetcher.fetch(new URL(url));
         TextDocument doc = new BoilerpipeSAXInput(htmlDoc.toInputSource()).getTextDocument();
