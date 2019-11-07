@@ -33,6 +33,12 @@ class SourceSearch {
         connection = url.openConnection();
     }
 
+    void connectToAPIByKeyWords(String key) throws IOException {
+        key = key.strip();
+        URL url = new URL("https://newsapi.org/v2/top-headlines?q="+key+"&apiKey=36033f4c106f44bd955f13e926095fad");
+        connection = url.openConnection();
+    }
+
     InputStream pullInputStream() throws IOException {
         InputStream inputStream = null;
         if (connection != null)

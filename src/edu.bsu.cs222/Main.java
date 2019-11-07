@@ -1,3 +1,5 @@
+import jdk.jshell.spi.ExecutionControl;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +8,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        //Ui to be added later
+
 //        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 //
 //        SwingUtilities.invokeLater(new Runnable() {
@@ -44,18 +48,37 @@ public class Main {
 //        }
 
         while (true) {
-            System.out.println("\nWould you like to narrow your search by a source, catagory, or country? yes or no");
+            System.out.println("\nWould you like to narrow your search by a source, catagory, key words, or country? yes or no");
             System.out.println("Press 'q' at any time to quit program");
             response = input.nextLine().toLowerCase();
             if (response.equals("q")){
                 break;
             }
             if (response.equals("yes")) {
-                System.out.println("Source, Catagory, or Country?");
+                System.out.println("Source, Catagory, Key Words, or Country?");
                 response = input.nextLine().toLowerCase();
 
                 if (response.equals("q")){
                     break;
+                }
+
+                if (response.equals("key words")){
+                    System.out.println("Enter Search");
+                    response= input.nextLine().toLowerCase();
+                    System.out.printf("\nThese are the top %s headlines for today:\n", response);
+                    parser = new JSONParser();
+                    try {
+                        sourceSearch.connectToAPIByKeyWords(response);
+                        stream = sourceSearch.pullInputStream();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    parser.getArticles(stream);
+                    parser.getTitleList();
+                    System.out.println("Enter number of article you would like to open");
+                    response = input.nextLine();
+                    int i = Integer.parseInt(response);
+                    parser.getURLContent(i - 1);
                 }
 
                 if (response.equals("source")) {
