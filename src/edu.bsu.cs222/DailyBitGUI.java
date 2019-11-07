@@ -17,8 +17,6 @@ public class DailyBitGUI extends JFrame {
     private JPanel rootPanel;
     private JComboBox comboBox1;
     private JComboBox comboBox2;
-    private JTextArea output;
-    private JScrollBar scrollBar1;
     private String newline = "\n";
     //private JSONParser parser = new JSONParser();
 
@@ -56,6 +54,7 @@ public class DailyBitGUI extends JFrame {
         setTitle("Daily Bit");
         setSize(700, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 
 
         searchConfirm.addActionListener(new ActionListener() {
@@ -96,7 +95,9 @@ public class DailyBitGUI extends JFrame {
             int lastIndex = e.getLastIndex();
             boolean isAdjusting = e.getValueIsAdjusting();
             try {
-                output.append(parser.getURLContent(firstIndex));
+//                output.append(parser.getURLContent(firstIndex));
+                JOptionPane.showMessageDialog(rootPanel, parser.getURLContent(firstIndex));
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

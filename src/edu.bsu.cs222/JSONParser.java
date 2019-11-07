@@ -43,7 +43,7 @@ class JSONParser {
         for (Map.Entry<String, JsonElement> revisionMap : value.getAsJsonObject().entrySet()) {
             String currentValue = revisionMap.getValue().toString();
             String key = revisionMap.getKey();
-            switch (key){
+            switch (key) {
                 case "title":
                     title = currentValue;
                     break;
@@ -72,46 +72,63 @@ class JSONParser {
         }
     }
 
-    ArrayList<String> TitleList(){
-        for( int i = 1; i <= articleList.size(); i++){
-            String title = articleList.get(i -1).getTitle();
+    ArrayList<String> TitleList() {
+        for (int i = 1; i <= articleList.size(); i++) {
+            String title = articleList.get(i - 1).getTitle();
             titleList.add(title);
         }
         return titleList;
     }
 
-    public String getURLContent(int articleNumber) throws Exception{
-        String url = articleList.get(articleNumber - 1).getUrl().replaceAll("\"","");
+    public String getURLContent(int articleNumber) throws Exception {
+        String url = articleList.get(articleNumber - 1).getUrl().replaceAll("\"", "");
         System.out.println(url);
         HTMLDocument htmlDoc = HTMLFetcher.fetch(new URL(url));
         TextDocument doc = new BoilerpipeSAXInput(htmlDoc.toInputSource()).getTextDocument();
         String content = CommonExtractors.ARTICLE_EXTRACTOR.getText(doc);
         System.out.println(content);
+//        content = formatParagragh(content);
         return content;
     }
 
-/*
-    private void getArticleContent(String url) throws IOException {
-        Document doc = Jsoup.connect(url).get();
-        String content = doc.getElementsByTag("p").text();
-        if(content.isEmpty()) {
-            content = doc.getElementsByTag("body").text();
-            if (content.isEmpty()) {
-                System.out.println("Error Retrieving Article: Implement new elementTag for this Article");
-            }
-            //System.out.println(content);
-            formatParagragh(content);
-        }
-        //System.out.println(content);
-        formatParagragh(content);
-    }
+//    public String contentParser(String article) {
+//        article.toCharArray();
+//        String newLine = "\n";
+//        System.out.println(article.length());
+//        for (int i = 0; i < article.length(); i++) {
+//            if (article.indexOf(i)%100==0 ){
+//                article = article[i] + newLine;
+//            }
+//
+//        }
+//        return article;
+//    }
 
-    private void formatParagragh(String content){
-        String[] strings = new String[10];
 
+
+
+//    private void getArticleContent(String url) throws IOException {
+//        Document doc = Jsoup.connect(url).get();
+//        String content = doc.getElementsByTag("p").text();
+//        if(content.isEmpty()) {
+//            content = doc.getElementsByTag("body").text();
+//            if (content.isEmpty()) {
+//                System.out.println("Error Retrieving Article: Implement new elementTag for this Article");
+//            }
+//            //System.out.println(content);
+//            formatParagragh(content);
+//        }
+//        //System.out.println(content);
+//        formatParagragh(content);
+//    }
+
+    private String formatParagragh(String content){
+        String[] strings = new String[500];
+        String pargraph = "";
+        int words =100;
         for(int i = 0; i < content.length() - 1; i++){
-            int wordCount = 60 * (i +1);
-            int lineIterator = wordCount/60;
+            int wordCount = words * (i +1);
+            int lineIterator = wordCount/words;
             if (content.length() > wordCount) {
                 strings[i] = content.substring(lineIterator,wordCount);
             } else {
@@ -120,8 +137,10 @@ class JSONParser {
             }
         }
         for(String string : strings){
-            System.out.println(string);
+             pargraph +=  string;
         }
+        return pargraph;
     }
- */
 }
+
+
