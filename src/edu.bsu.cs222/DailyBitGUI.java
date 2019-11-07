@@ -22,6 +22,7 @@ public class DailyBitGUI extends JFrame {
     JSONParser parser = new JSONParser();
     InputStream stream;
     //private JSONParser parser = new JSONParser();
+    // this class is for iteration 3
 
 
     DailyBitGUI() throws IOException {

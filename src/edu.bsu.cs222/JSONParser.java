@@ -92,6 +92,8 @@ class JSONParser {
     }
 
 /*
+This is for later iterations
+
     private void getArticleContent(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
         String content = doc.getElementsByTag("p").text();

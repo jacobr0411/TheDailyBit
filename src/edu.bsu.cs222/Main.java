@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        //Ui to be added later
+        //Ui to be added in iteration 3
 
 //        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 //
@@ -41,11 +41,7 @@ public class Main {
         }
         parser.getArticles(stream);
         parser.getTitleList();
-//        try {
-//            parser.getURLContent(6);
-//        } catch (Exception e){
-//            System.out.println(e);
-//        }
+
 
         while (true) {
             System.out.println("\nWould you like to narrow your search by a source, catagory, key words, or country? yes or no");

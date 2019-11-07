@@ -7,17 +7,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SourceSearchTest {
 
+
     @Test
-    void connectToAPI() throws IOException {
+    void connectToAPIBySource() throws IOException {
+        String source = "cnn";
+        InputStream stream = null;
         SourceSearch sourceSearch = new SourceSearch();
+        JSONParser parser = new JSONParser();
+        sourceSearch.connectToAPIBySource(source);
+        stream=sourceSearch.pullInputStream();
+        parser.getArticles(stream);
+        parser.getTitleList();
     }
 
     @Test
-    void connectToAPIBySource() {
-    }
-
-    @Test
-    void connectToAPIByCountry() {
+    void connectToAPIByCountry() throws IOException {
+        String country = "us";
+        InputStream stream = null;
+        SourceSearch sourceSearch = new SourceSearch();
+        JSONParser parser = new JSONParser();
+        sourceSearch.connectToAPIByCatagory(country);
+        stream=sourceSearch.pullInputStream();
+        parser.getArticles(stream);
+        parser.getTitleList();
     }
 
     @Test
@@ -31,8 +43,5 @@ class SourceSearchTest {
         parser.getArticles(stream);
         parser.getTitleList();
     }
-
-    @Test
-    void pullInputStream() {
-    }
+    
 }
