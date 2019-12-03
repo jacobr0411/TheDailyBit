@@ -1,3 +1,5 @@
+package edu.bsu.cs222;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class JSONParser {
+public class JSONParser {
 
     private List<Article> articleList = new ArrayList<>();
     private ArrayList<String> titleList = new ArrayList<>();

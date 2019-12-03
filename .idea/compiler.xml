@@ -9,8 +9,8 @@
         <module name="The-Daily-Bit-1" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11">
-      <module name="The-Daily-Bit-1" target="11" />
+    <bytecodeTargetLevel target="13">
+      <module name="The-Daily-Bit-1" target="13" />
     </bytecodeTargetLevel>
   </component>
 </project>

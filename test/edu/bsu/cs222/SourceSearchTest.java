@@ -1,9 +1,11 @@
+package edu.bsu.cs222;
+
+import edu.bsu.cs222.JSONParser;
+import edu.bsu.cs222.SourceSearch;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SourceSearchTest {
 

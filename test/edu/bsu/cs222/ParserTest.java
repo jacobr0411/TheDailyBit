@@ -1,3 +1,7 @@
+package edu.bsu.cs222;
+
+import edu.bsu.cs222.Article;
+import edu.bsu.cs222.JSONParser;
 import org.junit.Test;
 
 import java.io.InputStream;

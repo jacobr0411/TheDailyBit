@@ -1,3 +1,6 @@
+package edu.bsu.cs222;
+
+import edu.bsu.cs222.Article;
 import org.junit.Assert;
 import org.junit.Test;
 
