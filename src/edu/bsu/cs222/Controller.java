@@ -127,7 +127,7 @@ public class Controller{
         //for source Search
         else if (!sourceSelector.getValue().isEmpty()){
             try {
-                sourceSearch.connectToAPIByKeyWords(sourceSelector.getValue());
+                sourceSearch.connectToAPIBySource(sourceSelector.getValue());
                 stream = sourceSearch.pullInputStream();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -157,11 +157,11 @@ public class Controller{
 
     public void initialize(){
 
-        countrySelector.getItems().addAll("","us","jp");
+        countrySelector.getItems().addAll("","us","ar","au","at","be","br","bg","ca","cn","co","cu","cz","eg","fr","de","gr","hk","hu","in","id","ie","il","it","jp","lv","lt","my","mx","ma","nl","nz","ng","no","ph","pl","pt","ro","ru","sa","rs","sg","sk","si","za","kr","se","ch","tw","ua","ve","za");
 
         catagorySelector.getItems().addAll("","business","entertainment","general","health","science","sports","technology");
-        sourceSelector.getItems().addAll("","bbc","cnn");
-        
+        sourceSelector.getItems().addAll("","bbc","cnn","cnbc","msnbc","abc-news","time","crypto-coins-news","bbc-news","cbs-news","techcrunch","entertainment-weekly","buzzfeed","engadget","espn","hacker-news","fortune","fox-sports","fox-news","ign","the-huffington-post","wired","national-geographic","the-new-york-times","the-washington-times","the-washington-post","the-wall-street-journal","usa-today","al-jazeera-english","ansa","ars-technica","ary-news","associated-press","axios","bleacher-report","bloomberg","breitbart-news","mtv-news","business-insider");
+
         sourceSelector.setValue("");
         countrySelector.setValue("");
         catagorySelector.setValue("");
