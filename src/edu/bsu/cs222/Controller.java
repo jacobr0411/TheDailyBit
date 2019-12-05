@@ -1,17 +1,11 @@
 package edu.bsu.cs222;
 
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,6 +15,7 @@ public class Controller{
     public ChoiceBox<String> sourceSelector;
     public ChoiceBox<String> countrySelector;
     public ChoiceBox<String> catagorySelector;
+    public Label dateTime;
 
 
     InputStream stream = null;
@@ -119,7 +114,7 @@ public class Controller{
         //for term search
         else if (!searchTerm.getText().isEmpty()){
             try {
-                sourceSearch.connectToAPIByKeyWords(searchTerm.getText().toString()); //toString is redundant but it doesnt work without it
+                sourceSearch.connectToAPIByKeyWords(searchTerm.getText()); //toString is redundant but it doesnt work without it
                 stream = sourceSearch.pullInputStream();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -160,14 +155,13 @@ public class Controller{
 
     }
 
-    public void initialize() throws FileNotFoundException {
+    public void initialize(){
 
         countrySelector.getItems().addAll("","us","jp");
 
         catagorySelector.getItems().addAll("","business","entertainment","general","health","science","sports","technology");
         sourceSelector.getItems().addAll("","bbc","cnn");
-
-
+        
         sourceSelector.setValue("");
         countrySelector.setValue("");
         catagorySelector.setValue("");
