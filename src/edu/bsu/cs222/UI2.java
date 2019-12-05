@@ -10,5 +10,4 @@ public class UI2 {
     public void initialize(){
         textArea.setText(Controller.article);
     }
-
 }

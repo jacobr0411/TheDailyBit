@@ -155,48 +155,21 @@ public class Controller{
 
 
         int input = listView.getSelectionModel().getSelectedIndex();
-//        parser.getURLContent(input);
-
+        article=parser.getURLContent(input);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UI2.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
+        Parent root = fxmlLoader.load();
         Stage stage=new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Article");
-//        stage.setMinWidth(500);
-//        stage.setMaxHeight(500);
-
-//        Label label = new Label();
-//        textArea.setText(parser.getURLContent(input));
-
-//        UI2 ui2 = new UI2();
-//        ui2.setTextArea(parser.getURLContent(input));
-//
-        article=parser.getURLContent(input);
-
-//        UI2 ui2 = new UI2();
-//        TextArea label = new TextArea();
-//        label.setText(parser.getURLContent(input));
-
-//        Button closeButton = new Button("close the window");
-//        closeButton.setOnAction(e -> stage.close())
-
-//        VBox layout = new VBox(10);
-//        layout.getChildren().addAll(label);
-//        layout.setAlignment(Pos.CENTER);
-
-//        Scene scene = new Scene(layout);
         stage.setScene(new Scene(root));
         stage.showAndWait();
+
     }
 
     public void initialize() throws FileNotFoundException {
-//        ParseSearchTerms countries = new ParseSearchTerms();
-//
-//        countries.openFile();
-//        countries.readFile();
 
         countrySelector.getItems().addAll("","us");
-//        countries.closeFile();
+
         catagorySelector.getItems().addAll("","business","entertainment","general","health","science","sports","technology");
         sourceSelector.getItems().addAll("","bbc","cnn");
 

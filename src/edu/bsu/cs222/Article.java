@@ -30,16 +30,6 @@ public class Article {
         return url;
     }
 
-    String getUrlToImage() {
-        return urlToImage;
-    }
-
-    String getPublishedDate() {
-        return publishedDate;
-    }
-
-    String getContent(){return content;}
-
     @Override
     public String toString() {
         return "Article{" +

@@ -22,9 +22,6 @@ public class JSONParser {
     private List<Article> articleList = new ArrayList<>();
     private ArrayList<String> titleList = new ArrayList<>();
 
-    List<Article> getArticleList() {
-        return articleList;
-    }
 
     void getArticles(InputStream stream) {
         JsonParser parser = new JsonParser();
@@ -92,41 +89,4 @@ public class JSONParser {
         System.out.println(content);
         return content;
     }
-
-/*
-This is for later iterations
-
-    private void getArticleContent(String url) throws IOException {
-        Document doc = Jsoup.connect(url).get();
-        String content = doc.getElementsByTag("p").text();
-        if(content.isEmpty()) {
-            content = doc.getElementsByTag("body").text();
-            if (content.isEmpty()) {
-                System.out.println("Error Retrieving Article: Implement new elementTag for this Article");
-            }
-            //System.out.println(content);
-            formatParagragh(content);
-        }
-        //System.out.println(content);
-        formatParagragh(content);
-    }
-
-    private void formatParagragh(String content){
-        String[] strings = new String[10];
-
-        for(int i = 0; i < content.length() - 1; i++){
-            int wordCount = 60 * (i +1);
-            int lineIterator = wordCount/60;
-            if (content.length() > wordCount) {
-                strings[i] = content.substring(lineIterator,wordCount);
-            } else {
-                strings[i] = content.substring(lineIterator);
-                break;
-            }
-        }
-        for(String string : strings){
-            System.out.println(string);
-        }
-    }
- */
 }
