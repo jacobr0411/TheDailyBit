@@ -41,9 +41,6 @@ public class Controller{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
         }
 
         //for country and key search
@@ -54,9 +51,6 @@ public class Controller{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
         }
 
         //for country and catagory search
@@ -67,9 +61,6 @@ public class Controller{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
         }
 
         //for catagory and term search
@@ -80,9 +71,6 @@ public class Controller{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
         }
 
         //for country search
@@ -93,9 +81,6 @@ public class Controller{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
         }
 
         //for catagory selector
@@ -106,9 +91,6 @@ public class Controller{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
         }
 
         //for term search
@@ -119,9 +101,6 @@ public class Controller{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
         }
 
         //for source Search
@@ -132,13 +111,13 @@ public class Controller{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
         }
 
         else
             System.out.println("No input");
+        parser.getArticles(stream);
+        parser.getTitleList();
+        listView.getItems().addAll(parser.TitleList());
     }
 
     public void titleCliked() throws Exception {
