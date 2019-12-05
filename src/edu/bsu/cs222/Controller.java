@@ -116,8 +116,9 @@ public class Controller{
             }
         }
 
-        else
-            System.out.println("No input");
+        else {
+              System.out.println("No input");
+        }
         parser.getArticles(stream);
         parser.getTitleList();
         listView.getItems().addAll(parser.TitleList());
