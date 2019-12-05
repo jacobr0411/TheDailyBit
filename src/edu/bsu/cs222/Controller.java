@@ -28,12 +28,58 @@ public class Controller {
         parser = new JSONParser();
         sourceSearch = new SourceSearch();
 
-//        listView = new ListView<>();
-//        listView.refresh();
-//        if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().isEmpty()){
-//
-//        }
-        if (!countrySelector.getValue().isEmpty()) {
+
+        if (!sourceSelector.getValue().isEmpty()&!countrySelector.getValue().isEmpty()|!catagorySelector.getValue().equals("")|!searchTerm.getText().isEmpty()){
+            System.out.println("You can't do this");
+        }
+        else if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().equals("")&!searchTerm.getText().isEmpty()){
+            try {
+                sourceSearch.connectToAPIByCountryAndCatagoryAndKeyWord(countrySelector.getValue(),catagorySelector.getValue(),searchTerm.getText());
+                stream = sourceSearch.pullInputStream();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            parser.getArticles(stream);
+            parser.getTitleList();
+            listView.getItems().addAll(parser.TitleList());
+        }
+
+        else if (!countrySelector.getValue().isEmpty()&!searchTerm.getText().isEmpty()){
+            try {
+                sourceSearch.connectToAPIByCountryAndKeyWords(countrySelector.getValue(),searchTerm.getText());
+                stream = sourceSearch.pullInputStream();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            parser.getArticles(stream);
+            parser.getTitleList();
+            listView.getItems().addAll(parser.TitleList());
+        }
+
+        else if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().equals("")){
+            try {
+                sourceSearch.connectToAPIByCountryAndCatagory(countrySelector.getValue(),catagorySelector.getValue());
+                stream = sourceSearch.pullInputStream();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            parser.getArticles(stream);
+            parser.getTitleList();
+            listView.getItems().addAll(parser.TitleList());
+        }
+        else if (!catagorySelector.getValue().equals("")&!searchTerm.getText().isEmpty()){
+            try {
+                sourceSearch.connectToAPIByCatagoryAndKeyWords(catagorySelector.getValue(),searchTerm.getText());
+                stream = sourceSearch.pullInputStream();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            parser.getArticles(stream);
+            parser.getTitleList();
+            listView.getItems().addAll(parser.TitleList());
+        }
+
+        else if (!countrySelector.getValue().isEmpty()) {
             try {
                 sourceSearch.connectToAPIByCountry(countrySelector.getValue());
                 stream = sourceSearch.pullInputStream();
@@ -57,7 +103,19 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
-        else if (!sourceSelector.getValue().isEmpty()&countrySelector.getValue().isEmpty()|catagorySelector.getValue().isEmpty()){
+
+        else if (!searchTerm.getText().isEmpty()){
+            try {
+                sourceSearch.connectToAPIByKeyWords(searchTerm.getText().toString()); //toString is redundant but it doesnt work without it
+                stream = sourceSearch.pullInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            parser.getArticles(stream);
+            parser.getTitleList();
+            listView.getItems().addAll(parser.TitleList());
+        }
+        else if (!sourceSelector.getValue().isEmpty()){
             try {
                 sourceSearch.connectToAPIByKeyWords(sourceSelector.getValue());
                 stream = sourceSearch.pullInputStream();
@@ -68,6 +126,8 @@ public class Controller {
             parser.getTitleList();
             listView.getItems().addAll(parser.TitleList());
         }
+
+
         else
             System.out.println("No input");
 
@@ -82,7 +142,7 @@ public class Controller {
     public void initialize(){
 
         countrySelector.getItems().addAll("","us","jp");
-        catagorySelector.getItems().addAll("","business","entertainment");
+        catagorySelector.getItems().addAll("","business","entertainment","general","health","science","sports","technology");
         sourceSelector.getItems().addAll("","bbc","cnn");
 
         sourceSelector.setValue("");
