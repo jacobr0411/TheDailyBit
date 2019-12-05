@@ -40,6 +40,17 @@ public class SourceSearch {
         URL url = new URL("https://newsapi.org/v2/top-headlines?q="+key+"&apiKey=36033f4c106f44bd955f13e926095fad");
         connection = url.openConnection();
     }
+    void connectToAPIByCountryAndCatagory(String country, String catagory)throws IOException{
+        country = country.strip();
+        catagory = catagory.strip();
+        URL url = new URL("https://newsapi.org/v2/top-headlines?country="+country+"&category=" + catagory + "&apiKey=36033f4c106f44bd955f13e926095fad");
+        connection = url.openConnection();
+    }
+    void connectToAPIByCountryAndKeyWord(String country, String key){
+        country = country.strip();
+        key = key.strip();
+
+    }
 
     InputStream pullInputStream() throws IOException {
         InputStream inputStream = null;
