@@ -2,12 +2,16 @@
   <library name="Maven: com.google.code.gson:gson:2.8.5">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/" />
+      <root url="file://C:/Program Files/Java/javafx-sdk-13.0.1/lib" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5-sources.jar!/" />
+      <root url="file://C:/Program Files/Java/javafx-sdk-13.0.1/lib" />
     </SOURCES>
+    <jarDirectory url="file://C:/Program Files/Java/javafx-sdk-13.0.1/lib" recursive="false" />
+    <jarDirectory url="file://C:/Program Files/Java/javafx-sdk-13.0.1/lib" recursive="false" type="SOURCES" />
   </library>
 </component>

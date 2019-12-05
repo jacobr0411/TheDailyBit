@@ -1,13 +1,13 @@
 package edu.bsu.cs222;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.application.Platform;
+import javafx.scene.control.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Controller {
 
@@ -15,11 +15,12 @@ public class Controller {
     public ChoiceBox<String> sourceSelector;
     public ChoiceBox<String> countrySelector;
     public ChoiceBox<String> catagorySelector;
+    public Label dateTime;
 
-    InputStream stream = null;
-    JSONParser parser = new JSONParser();
+    private InputStream stream = null;
+    private JSONParser parser = new JSONParser();
 
-    SourceSearch sourceSearch = new SourceSearch();
+    private SourceSearch sourceSearch = new SourceSearch();
     public ListView<String> listView;
     public Button button;
 
@@ -29,64 +30,12 @@ public class Controller {
         parser = new JSONParser();
         sourceSearch = new SourceSearch();
 
-//api does not allow source serching to combine with anything else
-        if (!sourceSelector.getValue().isEmpty()&!countrySelector.getValue().isEmpty()|!catagorySelector.getValue().equals("")|!searchTerm.getText().isEmpty()){
-            System.out.println("You can't do this");
-        }
-        //for country and catagory and term search
-        else if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().equals("")&!searchTerm.getText().isEmpty()){
-            try {
-                sourceSearch.connectToAPIByCountryAndCatagoryAndKeyWord(countrySelector.getValue(),catagorySelector.getValue(),searchTerm.getText());
-                stream = sourceSearch.pullInputStream();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
-        }
-
-        //for country and key search
-        else if (!countrySelector.getValue().isEmpty()&!searchTerm.getText().isEmpty()){
-            try {
-                sourceSearch.connectToAPIByCountryAndKeyWords(countrySelector.getValue(),searchTerm.getText());
-                stream = sourceSearch.pullInputStream();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
-        }
-
-        //for country and catagory search
-        else if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().equals("")){
-            try {
-                sourceSearch.connectToAPIByCountryAndCatagory(countrySelector.getValue(),catagorySelector.getValue());
-                stream = sourceSearch.pullInputStream();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
-        }
-
-        //for catagory and term search
-        else if (!catagorySelector.getValue().equals("")&!searchTerm.getText().isEmpty()){
-            try {
-                sourceSearch.connectToAPIByCatagoryAndKeyWords(catagorySelector.getValue(),searchTerm.getText());
-                stream = sourceSearch.pullInputStream();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
-        }
-
-        //for country search
-        else if (!countrySelector.getValue().isEmpty()) {
+//        listView = new ListView<>();
+//        listView.refresh();
+//        if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().isEmpty()){
+//
+//        }
+        if (!countrySelector.getValue().isEmpty()) {
             try {
                 sourceSearch.connectToAPIByCountry(countrySelector.getValue());
                 stream = sourceSearch.pullInputStream();
@@ -98,7 +47,6 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
-        //for catagory selector
         else if (!catagorySelector.getValue().equals("")){
             try {
                 sourceSearch.connectToAPIByCatagory(catagorySelector.getValue());
@@ -111,21 +59,7 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
-        //for term search
-        else if (!searchTerm.getText().isEmpty()){
-            try {
-                sourceSearch.connectToAPIByKeyWords(searchTerm.getText().toString()); //toString is redundant but it doesnt work without it
-                stream = sourceSearch.pullInputStream();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            parser.getArticles(stream);
-            parser.getTitleList();
-            listView.getItems().addAll(parser.TitleList());
-        }
-
-        //for source Search
-        else if (!sourceSelector.getValue().isEmpty()){
+        else if (!sourceSelector.getValue().isEmpty()&countrySelector.getValue().isEmpty()|catagorySelector.getValue().isEmpty()){
             try {
                 sourceSearch.connectToAPIByKeyWords(sourceSelector.getValue());
                 stream = sourceSearch.pullInputStream();
@@ -136,7 +70,6 @@ public class Controller {
             parser.getTitleList();
             listView.getItems().addAll(parser.TitleList());
         }
-
         else
             System.out.println("No input");
     }
@@ -147,6 +80,23 @@ public class Controller {
     }
 
     public void initialize() throws FileNotFoundException {
+        Thread timerThread = new Thread(() -> {
+           SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+           while (true) {
+               try {
+                   Thread.sleep(1000); //1 second
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+               final String time = simpleDateFormat.format(new Date());
+               Platform.runLater(() -> {
+                   System.out.println(time);
+                   dateTime.setText(time);
+               });
+           }
+        });
+
+        timerThread.start();
         ParseSearchTerms countries = new ParseSearchTerms();
 
         countries.openFile();

@@ -22,6 +22,7 @@
                   <ChoiceBox fx:id="catagorySelector" layoutX="105.0" layoutY="39.0" prefWidth="150.0" />
                   <Label layoutY="43.0" text="Sort by Catagory" />
                   <TextField fx:id="searchTerm" layoutX="217.0" layoutY="76.0" />
+                  <Label fx:id="dateTime" layoutX="549.0" layoutY="-1.0" prefHeight="17.0" prefWidth="46.0" text="00:00:00" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
