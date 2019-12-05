@@ -16,10 +16,9 @@ public class ParseSearchTerms {
 
     public void openFile() throws FileNotFoundException {
         File file = new File("Countries.txt");
-        Scanner x = new Scanner(file);
+        x = new Scanner(file);
     }
     public void readFile(){
-        x.useDelimiter(" ");
         while (x.hasNext()){
             String fullName = x.next();
             String abreviation = x.next();
