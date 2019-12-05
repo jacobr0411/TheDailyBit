@@ -14,16 +14,19 @@
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
-                        <ChoiceBox layoutX="148.0" layoutY="1.0" prefWidth="150.0" />
-                        <ChoiceBox layoutX="148.0" layoutY="42.0" prefWidth="150.0" />
-                        <Button fx:id="button" layoutX="197.0" layoutY="83.0" mnemonicParsing="false" onAction="#searchButtonClicked" text="Search" />
-                        <Label layoutY="5.0" prefHeight="18.0" prefWidth="150.0" text="Sort by Source" />
-                        <Label layoutY="45.0" prefHeight="18.0" prefWidth="150.0" text="Sort by Country" />
+                        <ChoiceBox layoutX="403.0" layoutY="38.0" prefWidth="150.0" />
+                        <ChoiceBox layoutX="105.0" layoutY="9.0" prefWidth="150.0" />
+                        <Button fx:id="button" layoutX="153.0" layoutY="76.0" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="18.0" prefWidth="64.0" text="Search" />
+                        <Label layoutX="307.0" layoutY="42.0" prefHeight="18.0" prefWidth="150.0" text="Sort by Source" />
+                        <Label layoutY="12.0" prefHeight="18.0" prefWidth="150.0" text="Sort by Country" />
+                  <ChoiceBox layoutX="105.0" layoutY="39.0" prefWidth="150.0" />
+                  <Label layoutY="43.0" text="Sort by Catagory" />
+                  <TextField fx:id="searchTerm" layoutX="217.0" layoutY="76.0" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
-                        <ListView fx:id="listView" prefHeight="258.4" prefWidth="598.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ListView fx:id="listView" onMouseClicked="#titleCliked" prefHeight="258.4" prefWidth="598.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <contextMenu>
                                 <ContextMenu>
                                     <items>
