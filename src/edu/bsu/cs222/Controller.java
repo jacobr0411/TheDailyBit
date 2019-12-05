@@ -38,12 +38,8 @@ public class Controller{
         parser = new JSONParser();
         sourceSearch = new SourceSearch();
 
-//api does not allow source serching to combine with anything else
-        if (!sourceSelector.getValue().isEmpty()&!countrySelector.getValue().isEmpty()|!catagorySelector.getValue().equals("")|!searchTerm.getText().isEmpty()){
-            System.out.println("You can't do this");
-        }
         //for country and catagory and term search
-        else if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().equals("")&!searchTerm.getText().isEmpty()){
+          if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().equals("")&!searchTerm.getText().isEmpty()){
             try {
                 sourceSearch.connectToAPIByCountryAndCatagoryAndKeyWord(countrySelector.getValue(),catagorySelector.getValue(),searchTerm.getText());
                 stream = sourceSearch.pullInputStream();
@@ -152,8 +148,6 @@ public class Controller{
 
     public void titleCliked() throws Exception {
 
-
-
         int input = listView.getSelectionModel().getSelectedIndex();
         article=parser.getURLContent(input);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UI2.fxml"));
@@ -168,7 +162,7 @@ public class Controller{
 
     public void initialize() throws FileNotFoundException {
 
-        countrySelector.getItems().addAll("","us");
+        countrySelector.getItems().addAll("","us","jp");
 
         catagorySelector.getItems().addAll("","business","entertainment","general","health","science","sports","technology");
         sourceSelector.getItems().addAll("","bbc","cnn");
