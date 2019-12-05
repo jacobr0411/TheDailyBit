@@ -140,7 +140,7 @@ public class Controller{
 
     public void initialize(){
         Thread timerThread = new Thread(() -> {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
             while (true) {
                 try {
                     Thread.sleep(1000); //1 second
@@ -149,7 +149,6 @@ public class Controller{
                 }
                 final String time = simpleDateFormat.format(new Date());
                 Platform.runLater(() -> {
-                    System.out.println(time);
                     dateTime.setText(time);
                 });
             }
