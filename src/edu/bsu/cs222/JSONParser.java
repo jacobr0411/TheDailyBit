@@ -82,11 +82,8 @@ public class JSONParser {
 
     public String getURLContent(int articleNumber) throws Exception{
         String url = articleList.get(articleNumber).getUrl().replaceAll("\"","");
-        System.out.println(url);
         HTMLDocument htmlDoc = HTMLFetcher.fetch(new URL(url));
         TextDocument doc = new BoilerpipeSAXInput(htmlDoc.toInputSource()).getTextDocument();
-        String content = CommonExtractors.ARTICLE_EXTRACTOR.getText(doc);
-        System.out.println(content);
-        return content;
+        return CommonExtractors.ARTICLE_EXTRACTOR.getText(doc);
     }
 }
