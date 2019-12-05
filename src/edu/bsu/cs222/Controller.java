@@ -5,6 +5,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -28,10 +29,11 @@ public class Controller {
         parser = new JSONParser();
         sourceSearch = new SourceSearch();
 
-
+//api does not allow source serching to combine with anything else
         if (!sourceSelector.getValue().isEmpty()&!countrySelector.getValue().isEmpty()|!catagorySelector.getValue().equals("")|!searchTerm.getText().isEmpty()){
             System.out.println("You can't do this");
         }
+        //for country and catagory and term search
         else if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().equals("")&!searchTerm.getText().isEmpty()){
             try {
                 sourceSearch.connectToAPIByCountryAndCatagoryAndKeyWord(countrySelector.getValue(),catagorySelector.getValue(),searchTerm.getText());
@@ -44,6 +46,7 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
+        //for country and key search
         else if (!countrySelector.getValue().isEmpty()&!searchTerm.getText().isEmpty()){
             try {
                 sourceSearch.connectToAPIByCountryAndKeyWords(countrySelector.getValue(),searchTerm.getText());
@@ -56,6 +59,7 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
+        //for country and catagory search
         else if (!countrySelector.getValue().isEmpty()&!catagorySelector.getValue().equals("")){
             try {
                 sourceSearch.connectToAPIByCountryAndCatagory(countrySelector.getValue(),catagorySelector.getValue());
@@ -67,6 +71,8 @@ public class Controller {
             parser.getTitleList();
             listView.getItems().addAll(parser.TitleList());
         }
+
+        //for catagory and term search
         else if (!catagorySelector.getValue().equals("")&!searchTerm.getText().isEmpty()){
             try {
                 sourceSearch.connectToAPIByCatagoryAndKeyWords(catagorySelector.getValue(),searchTerm.getText());
@@ -79,6 +85,7 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
+        //for country search
         else if (!countrySelector.getValue().isEmpty()) {
             try {
                 sourceSearch.connectToAPIByCountry(countrySelector.getValue());
@@ -91,6 +98,7 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
+        //for catagory selector
         else if (!catagorySelector.getValue().equals("")){
             try {
                 sourceSearch.connectToAPIByCatagory(catagorySelector.getValue());
@@ -103,7 +111,7 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
-
+        //for term search
         else if (!searchTerm.getText().isEmpty()){
             try {
                 sourceSearch.connectToAPIByKeyWords(searchTerm.getText().toString()); //toString is redundant but it doesnt work without it
@@ -115,6 +123,8 @@ public class Controller {
             parser.getTitleList();
             listView.getItems().addAll(parser.TitleList());
         }
+
+        //for source Search
         else if (!sourceSelector.getValue().isEmpty()){
             try {
                 sourceSearch.connectToAPIByKeyWords(sourceSelector.getValue());
@@ -127,11 +137,8 @@ public class Controller {
             listView.getItems().addAll(parser.TitleList());
         }
 
-
         else
             System.out.println("No input");
-
-
     }
 
     public void titleCliked() throws Exception {
@@ -139,9 +146,14 @@ public class Controller {
         parser.getURLContent(input);
     }
 
-    public void initialize(){
+    public void initialize() throws FileNotFoundException {
+        ParseSearchTerms countries = new ParseSearchTerms();
 
-        countrySelector.getItems().addAll("","us","jp");
+        countries.openFile();
+        countries.readFile();
+
+        countrySelector.getItems().addAll(countries.getCountries());
+        countries.closeFile();
         catagorySelector.getItems().addAll("","business","entertainment","general","health","science","sports","technology");
         sourceSelector.getItems().addAll("","bbc","cnn");
 
