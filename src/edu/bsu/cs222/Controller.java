@@ -6,19 +6,41 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.io.InputStream;
-import java.util.Scanner;
 
 public class Controller {
 
     public TextField searchTerm;
+    public ChoiceBox sourceSelector;
+    public ChoiceBox<String> countrySelector;
+    public ChoiceBox catagorySelector;
+
     InputStream stream = null;
     JSONParser parser = new JSONParser();
+
     SourceSearch sourceSearch = new SourceSearch();
     public ListView<String> listView;
     public Button button;
 
     public void searchButtonClicked(){
-        System.out.println("Is this thing working?");
+        stream = null;
+        listView.getItems().removeAll(parser.TitleList());
+        parser = new JSONParser();
+        sourceSearch = new SourceSearch();
+
+
+//        listView = new ListView<>();
+//        listView.refresh();
+
+        try {
+            sourceSearch.connectToAPIByCountry(countrySelector.getValue().toString());
+            stream = sourceSearch.pullInputStream();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        parser.getArticles(stream);
+        parser.getTitleList();
+        listView.getItems().addAll(parser.TitleList());
+
     }
 
     public void titleCliked() throws Exception {
@@ -27,9 +49,8 @@ public class Controller {
     }
 
     public void initialize(){
-//        InputStream stream = null;
-//        JSONParser parser = new JSONParser();
-//        SourceSearch sourceSearch = new SourceSearch();
+
+        countrySelector.getItems().addAll("","us","jp");
 
         System.out.println("Welcome to the Daily Bit.\n\nHere are the top headlines for the day:");
 

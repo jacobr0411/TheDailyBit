@@ -14,12 +14,12 @@
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
-                        <ChoiceBox layoutX="403.0" layoutY="38.0" prefWidth="150.0" />
-                        <ChoiceBox layoutX="105.0" layoutY="9.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="sourceSelector" layoutX="403.0" layoutY="38.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="countrySelector" layoutX="105.0" layoutY="9.0" prefWidth="150.0" />
                         <Button fx:id="button" layoutX="153.0" layoutY="76.0" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="18.0" prefWidth="64.0" text="Search" />
-                        <Label layoutX="307.0" layoutY="42.0" prefHeight="18.0" prefWidth="150.0" text="Sort by Source" />
+                        <Label layoutX="307.0" layoutY="42.0" prefHeight="18.0" prefWidth="90.0" text="Sort by Source" />
                         <Label layoutY="12.0" prefHeight="18.0" prefWidth="150.0" text="Sort by Country" />
-                  <ChoiceBox layoutX="105.0" layoutY="39.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="catagorySelector" layoutX="105.0" layoutY="39.0" prefWidth="150.0" />
                   <Label layoutY="43.0" text="Sort by Catagory" />
                   <TextField fx:id="searchTerm" layoutX="217.0" layoutY="76.0" />
                     </children>
